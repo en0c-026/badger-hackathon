@@ -1,4 +1,4 @@
-import { CssBaseline } from '@material-ui/core';
+import { createTheme, CssBaseline, ThemeProvider } from '@material-ui/core';
 import { startRouter } from 'mobx-router';
 import React, { createContext } from 'react';
 import ReactDOM from 'react-dom';
@@ -13,10 +13,18 @@ startRouter(routes, store, {
   html5history: true,
 });
 
+const theme = createTheme({
+  typography: {
+    fontFamily: '"IBM Plex Mono", "IBM Plex Sans", mono space, sans-serif',
+  },
+});
+
 ReactDOM.render(
   <StoreProvider value={store}>
-    <CssBaseline />
-    <App />
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <App />
+    </ThemeProvider>
   </StoreProvider>,
   document.getElementById('root'),
 );

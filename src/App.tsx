@@ -8,8 +8,8 @@ const useStyles = makeStyles((theme) => ({
     maxWidth: '100%',
     paddingTop: theme.spacing(2),
     minHeight: '100vh',
-    backgroundColor: '#292929',
-    color: '#Ccd6db',
+    backgroundColor: '#181818',
+    color: '#FFFFFF',
   },
 }));
 
