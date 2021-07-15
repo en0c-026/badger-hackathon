@@ -10,12 +10,15 @@ export const useStyleCard = makeStyles(() => ({
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'space-around',
-    padding: '32px 24px',
+    padding: '16px',
     color: '#FFFFFF',
     backgroundColor: '#2B2B2B',
     height: '100%',
     boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)',
     borderRadius: '16px',
+  },
+  button: {
+    backgroundColor: '#121212',
   },
 }));
 
