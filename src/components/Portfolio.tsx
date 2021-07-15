@@ -1,10 +1,17 @@
 import React from 'react';
-import { Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core';
+import Header from './Header';
 
 const useStyles = makeStyles((theme) => ({
   rootContainer: {
-    height: '100%',
+    height: '100vh',
+    padding: '0 10%',
+    backgroundImage: 'url(/img/background.png)',
+    backgroundRepeat: 'no-repeat',
+    backgroundPosition: '50% 50%',
+    backgroundSize: 'contain',
+    display: 'flex',
+    justifyContent: 'center',
   },
 }));
 
@@ -13,9 +20,7 @@ const Portfolio = (): JSX.Element => {
 
   return (
     <div className={classes.rootContainer}>
-      <Typography variant="h4" align="center">
-        Badger Portfolio
-      </Typography>
+      <Header />
     </div>
   );
 };
