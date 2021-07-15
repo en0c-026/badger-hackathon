@@ -21,8 +21,8 @@ export const useStyleCard = makeStyles(() => ({
 
 const useStyleHeader = makeStyles(() => ({
   gridContainer: {
-    height: '100%',
-    maxHeight: '176px',
+    minHeight: '176px',
+    marginBottom: '24px',
   },
 }));
 
