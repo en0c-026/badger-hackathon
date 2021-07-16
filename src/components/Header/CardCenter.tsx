@@ -7,7 +7,7 @@ const CardCenter = () => {
   return (
     <Card className={classes.baseCard}>
       <Typography variant="caption">$40,200.00</Typography>
-      <Typography variant="subtitle1" color="secondary">
+      <Typography variant="subtitle1" color="textPrimary">
         Pending
       </Typography>
       <Button variant="contained" size="small" className={classes.button} fullWidth>
