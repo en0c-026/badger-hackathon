@@ -21,9 +21,11 @@ const theme = createTheme({
     secondary: {
       main: '#747474',
     },
-    warning: {
-      main: '#F2A627',
+    text: {
+      primary: '#747474',
+      secondary: '#F2A627',
     },
+    divider: '#111111',
   },
   typography: {
     fontFamily: '"IBM Plex Sans", sans-serif',
