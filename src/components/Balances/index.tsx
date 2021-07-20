@@ -3,7 +3,11 @@ import React from 'react';
 import Asset from './Asset';
 import Strategy from './Strategy';
 
-export const useStyleCardBalances = makeStyles(() => ({
+export const useStyleBalances = makeStyles(() => ({
+  rootContainer: {
+    minWidth: '100%',
+    marginBottom: '24px',
+  },
   baseCard: {
     padding: '32px 24px',
     color: '#FFFFFF',
@@ -12,13 +16,6 @@ export const useStyleCardBalances = makeStyles(() => ({
     boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)',
     borderRadius: '16px',
     marginBottom: '16px',
-  },
-}));
-
-const useStyleBalances = makeStyles(() => ({
-  rootContainer: {
-    minWidth: '100%',
-    marginBottom: '24px',
   },
 }));
 

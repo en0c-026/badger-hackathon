@@ -1,9 +1,9 @@
 import { Typography } from '@material-ui/core';
 import React from 'react';
-import { useStyleCardBalances } from '.';
+import { useStyleBalances } from '.';
 
 const Strategy = () => {
-  const classes = useStyleCardBalances();
+  const classes = useStyleBalances();
   return (
     <div className={classes.baseCard}>
       <Typography>asd</Typography>
