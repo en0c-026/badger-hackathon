@@ -5,6 +5,7 @@ import EarningsValue from './EarningsValue';
 import { SettSelector } from './SettSelector';
 import SetupChartButtons from './SetupChartButtons';
 import { SettVaultsChart } from './SettVaultsChart';
+import CharReference from './CharReference';
 
 export const useStyleHoldings = makeStyles(() => ({
   rootCard: {
@@ -30,7 +31,11 @@ export const useStyleHoldings = makeStyles(() => ({
 }));
 
 const defaultState: Array<boolean> = [false, false, false, false, false, false, false, false, false];
-
+const testArray = [
+  { name: 'pv', color: '#FFCC33' },
+  { name: 'uv', color: '#0066FF' },
+  { name: 'amt', color: '#FF1FFF' },
+];
 const Holdings = (): JSX.Element => {
   const classes = useStyleHoldings();
   const [timeframe, setTimeFrame] = useState<string>('1D');
@@ -55,7 +60,7 @@ const Holdings = (): JSX.Element => {
         <BadgerRewards />
         <SetupChartButtons timeframe={timeframe} setTimeFrame={setTimeFrame} handleOpenModal={handleOpenModal} />
         <SettVaultsChart width={width} />
-        <BadgerRewards />
+        <CharReference activeVaults={testArray} />
       </Grid>
 
       {openModal && (
