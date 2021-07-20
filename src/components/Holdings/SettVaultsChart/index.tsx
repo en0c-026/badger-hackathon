@@ -52,7 +52,7 @@ const data = [
 
 export const useStyleVaultsChart = makeStyles({
   paperChart: {
-    marginTop: '20px',
+    margin: '20px 0px',
     backgroundColor: '#101010',
     borderRadius: '8px',
   },
@@ -70,7 +70,6 @@ const testArray = [
   { name: 'uv', color: '#0066FF' },
   { name: 'amt', color: '#FF1FFF' },
 ];
-
 export const SettVaultsChart = memo(({ width }: any) => {
   const classes = useStyleVaultsChart();
   return (
@@ -96,8 +95,8 @@ export const SettVaultsChart = memo(({ width }: any) => {
         <defs>
           {testArray.map((key: any, index: any) => (
             <linearGradient key={index} id={key.name} x1="0" y1="0" x2="0" y2="1">
-              <stop offset="40%" stopColor={key.color} stopOpacity={0.3} />
-              <stop offset="95%" stopColor="#FFFFFF" stopOpacity={0} />
+              <stop offset="55%" stopColor={key.color} stopOpacity={0.3} />
+              <stop offset="95%" stopColor="#FFFFFF" stopOpacity={0.0001} />
             </linearGradient>
           ))}
         </defs>
