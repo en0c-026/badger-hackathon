@@ -1,13 +1,8 @@
 import { Card, Grid, Typography } from '@material-ui/core';
-import { FiberManualRecord } from '@material-ui/icons';
 import React, { memo } from 'react';
 import { useStyleVaultsChart } from '.';
 import { arraySum, formatNumber } from '../../../utils';
-
-const DotColorVault = (props: any) => {
-  const { color } = props;
-  return <FiberManualRecord style={{ color: color, paddingLeft: '4px', height: '8px', width: '8x' }} />;
-};
+import DotColorVault from './DotColorVault';
 
 const ToolTipCard = memo(({ active, payload, label }: any) => {
   const classes = useStyleVaultsChart();
