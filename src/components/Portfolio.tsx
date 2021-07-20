@@ -8,6 +8,7 @@ import Balances from './Balances';
 const useStyles = makeStyles((theme) => ({
   rootContainer: {
     minHeight: '100vh',
+    minWight: '100vw',
     padding: '0 10%',
     backgroundImage: 'url(/img/background.png)',
     backgroundRepeat: 'no-repeat',
