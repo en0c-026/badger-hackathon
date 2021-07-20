@@ -85,6 +85,20 @@ const theme = createTheme({
       fontSize: '13px',
       lineHeight: '16.9px',
     },
+    body1: {
+      fontFamily: '"IBM Plex Mono", mono space',
+      fontWeight: 400,
+      fontStyle: 'normal',
+      fontSize: '16px',
+      lineHeight: '21px',
+    },
+    body2: {
+      fontFamily: '"IBM Plex Mono", mono space',
+      fontWeight: 400,
+      fontStyle: 'normal',
+      fontSize: '13px',
+      lineHeight: '21px',
+    },
     caption: {
       fontFamily: '"IBM Plex Mono", mono space',
       fontWeight: 400,

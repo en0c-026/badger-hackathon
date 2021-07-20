@@ -46,12 +46,14 @@ const Holdings = (): JSX.Element => {
         <BadgerRewards />
         <SetupChartButtons timeframe={timeframe} setTimeFrame={setTimeFrame} handleOpenModal={handleOpenModal} />
       </Grid>
-      <SettSelector
-        openModal={openModal}
-        handleCloseModal={handleCloseModal}
-        checkboxs={checkboxs}
-        setCheckboxs={setCheckboxs}
-      />
+      {openModal && (
+        <SettSelector
+          openModal={openModal}
+          handleCloseModal={handleCloseModal}
+          checkboxs={checkboxs}
+          setCheckboxs={setCheckboxs}
+        />
+      )}
     </Paper>
   );
 };
