@@ -1,13 +1,14 @@
-import React, { useState } from 'react';
+import React, { useLayoutEffect, useRef, useState } from 'react';
 import { makeStyles, Grid, Paper } from '@material-ui/core';
 import BadgerRewards from './BadgerRewards';
 import EarningsValue from './EarningsValue';
 import { SettSelector } from './SettSelector';
 import SetupChartButtons from './SetupChartButtons';
+import { SettVaultsChart } from './SettVaultsChart';
 
 export const useStyleHoldings = makeStyles(() => ({
   rootCard: {
-    minHeight: '696px',
+    minHeight: '704px',
     marginBottom: '24px',
     padding: '32px 26px',
     color: '#FFFFFF',
@@ -35,17 +36,28 @@ const Holdings = (): JSX.Element => {
   const [timeframe, setTimeFrame] = useState<string>('1D');
   const [openModal, setOpenModal] = useState<boolean>(false);
   const [checkboxs, setCheckboxs] = useState<Array<boolean>>(defaultState);
+  const targetRef = useRef<any>();
+  const [width, setWidth] = useState(0);
+
+  useLayoutEffect(() => {
+    if (targetRef.current) {
+      setWidth(targetRef.current.offsetWidth);
+    }
+  }, []);
 
   const handleOpenModal = () => setOpenModal(true);
   const handleCloseModal = () => setOpenModal(false);
 
   return (
     <Paper className={classes.rootCard}>
-      <Grid container spacing={3} direction="column">
+      <Grid container spacing={3} direction="column" ref={targetRef}>
         <EarningsValue />
         <BadgerRewards />
         <SetupChartButtons timeframe={timeframe} setTimeFrame={setTimeFrame} handleOpenModal={handleOpenModal} />
+        <SettVaultsChart width={width} />
+        <BadgerRewards />
       </Grid>
+
       {openModal && (
         <SettSelector
           openModal={openModal}
