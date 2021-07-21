@@ -20,7 +20,7 @@ const Checkboxes = (props: any) => {
                 onChange={handleChangeSingle}
                 id={pair.id}
                 checkedIcon={<Check className={classes.checkedIcon} />}
-                icon={<Avatar variant="square" src={pair.logo} className={classes.icon} />}
+                icon={<Avatar variant="square" src={`/img/settvaults/${pair.symbol}.png`} className={classes.icon} />}
               />
             }
             label={<LabelCheckBox pair={pair} checked={checkboxs[parseInt(pair.id)]} />}
@@ -37,7 +37,7 @@ const Checkboxes = (props: any) => {
                 onChange={handleChangeSingle}
                 id={pair.id}
                 checkedIcon={<Check className={classes.checkedIcon} />}
-                icon={<Avatar variant="square" src={pair.logo} className={classes.icon} />}
+                icon={<Avatar variant="square" src={`/img/settvaults/${pair.symbol}.png`} className={classes.icon} />}
               />
             }
             label={<LabelCheckBox pair={pair} checked={checkboxs[parseInt(pair.id)]} />}
@@ -54,7 +54,7 @@ const Checkboxes = (props: any) => {
                 onChange={handleChangeSingle}
                 id={pair.id}
                 checkedIcon={<Check className={classes.checkedIcon} />}
-                icon={<Avatar variant="square" src={pair.logo} className={classes.icon} />}
+                icon={<Avatar variant="square" src={`/img/settvaults/${pair.symbol}.png`} className={classes.icon} />}
               />
             }
             label={<LabelCheckBox pair={pair} checked={checkboxs[parseInt(pair.id)]} />}

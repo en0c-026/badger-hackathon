@@ -19,11 +19,11 @@ const ChipCheckbox = withStyles({
 })(Chip);
 
 const LabelCheckBox = (props: any) => {
-  const { ticker, source, tag } = props.pair;
+  const { name, source, tag } = props.pair;
   return (
     <Grid container alignItems="center">
       <Typography variant="h4" color={props.checked ? 'textSecondary' : 'textPrimary'}>
-        {ticker}
+        {name}
       </Typography>
       <ChipCheckbox label={source} />
       {tag && <ChipCheckbox label={tag} />}

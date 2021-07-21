@@ -30,7 +30,7 @@ export const useStyleHoldings = makeStyles(() => ({
   },
 }));
 
-const defaultState: Array<boolean> = [false, false, false, false, false, false, false, false, false];
+const defaultState: Array<boolean> = [false, false, false, false, false, false, false, false, false, false];
 const testArray = [
   { name: 'pv', color: '#FFCC33' },
   { name: 'uv', color: '#0066FF' },
