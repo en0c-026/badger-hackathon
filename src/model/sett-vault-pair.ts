@@ -1,7 +1,7 @@
 export interface SettVaultPair {
   id: string;
-  ticker: string;
+  name: string;
   source: string;
-  logo: string;
+  symbol: string;
   tag?: string;
 }
