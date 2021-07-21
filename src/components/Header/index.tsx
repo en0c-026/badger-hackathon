@@ -7,7 +7,7 @@ import CardLeft from './CardLeft';
 export const useStyleHeader = makeStyles((theme: Theme) => ({
   gridContainer: {
     minHeight: '176px',
-    marginBottom: '24px',
+    marginBottom: theme.spacing(3),
   },
   baseCard: {
     display: 'flex',
