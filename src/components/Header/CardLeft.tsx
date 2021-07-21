@@ -1,9 +1,9 @@
 import { Card, Typography, Grid, Divider } from '@material-ui/core';
 import React from 'react';
-import { useStyleCard } from '.';
+import { useStyleHeader } from '.';
 
 const CardLeft = () => {
-  const classes = useStyleCard();
+  const classes = useStyleHeader();
   return (
     <Card className={classes.styledCard}>
       <Grid container spacing={1}>

@@ -1,9 +1,9 @@
 import React from 'react';
 import { Button, Card, Typography } from '@material-ui/core';
-import { useStyleCard } from '.';
+import { useStyleHeader } from '.';
 
 const CardCenter = () => {
-  const classes = useStyleCard();
+  const classes = useStyleHeader();
   return (
     <Card className={classes.baseCard}>
       <Typography variant="caption">$40,200.00</Typography>

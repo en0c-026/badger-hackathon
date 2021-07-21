@@ -1,42 +1,39 @@
 import React from 'react';
-import { Grid, makeStyles } from '@material-ui/core';
+import { Grid, makeStyles, Theme } from '@material-ui/core';
 import CardRight from './CardRight';
 import CardCenter from './CardCenter';
 import CardLeft from './CardLeft';
 
-export const useStyleCard = makeStyles(() => ({
+export const useStyleHeader = makeStyles((theme: Theme) => ({
+  gridContainer: {
+    minHeight: '176px',
+    marginBottom: '24px',
+  },
   baseCard: {
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'space-around',
-    padding: '16px',
+    padding: theme.spacing(2),
     color: '#FFFFFF',
     backgroundColor: '#2B2B2B',
     height: '100%',
     boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)',
-    borderRadius: '16px',
+    borderRadius: theme.spacing(2),
   },
   styledCard: {
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'space-around',
-    padding: '16px',
+    padding: theme.spacing(2),
     color: '#FFFFFF',
     backgroundColor: '#2B2B2B',
     height: '100%',
     boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)',
-    borderRadius: '16px',
+    borderRadius: theme.spacing(2),
   },
   button: {
     backgroundColor: '#121212',
-  },
-}));
-
-const useStyleHeader = makeStyles(() => ({
-  gridContainer: {
-    minHeight: '176px',
-    marginBottom: '24px',
   },
 }));
 

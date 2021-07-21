@@ -1,9 +1,9 @@
 import { Card, Typography } from '@material-ui/core';
 import React from 'react';
-import { useStyleCard } from '.';
+import { useStyleHeader } from '.';
 
 const CardRight = () => {
-  const classes = useStyleCard();
+  const classes = useStyleHeader();
   return (
     <Card className={classes.baseCard}>
       <Typography variant="caption">1.69</Typography>
