@@ -3,7 +3,7 @@ import { Card, Grid, Typography } from '@material-ui/core';
 import { useStyleAllocation } from '.';
 import { Cell, Pie, PieChart, Tooltip } from 'recharts';
 import { colors } from '../../config/constants';
-import SingleAsset from './SingleAsset';
+import SingleItem from './SingleItem';
 
 export interface AllocationCardProps {
   title: string;
@@ -32,7 +32,7 @@ const AllocationCard = ({ title, subtitle, path, data }: AllocationCardProps) =>
         </Grid>
         <Grid item xs>
           {data.map((asset, i) => (
-            <SingleAsset key={i} path={path} {...asset} />
+            <SingleItem key={i} path={path} {...asset} />
           ))}
         </Grid>
       </Grid>

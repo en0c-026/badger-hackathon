@@ -1,12 +1,12 @@
 import { Box, Avatar, Typography } from '@material-ui/core';
 import React from 'react';
 
-export interface SingleAssetProps {
+export interface SingleItemProps {
   name: string;
   value: number;
   path: string;
 }
-const SingleAsset = ({ name, value, path }: SingleAssetProps) => {
+const SingleItem = ({ name, value, path }: SingleItemProps) => {
   return (
     <Box display="flex" pt={1} mb={2}>
       <Avatar src={`/img/${path}/${name}.png`} style={{ marginRight: '12px' }} />
@@ -20,4 +20,4 @@ const SingleAsset = ({ name, value, path }: SingleAssetProps) => {
   );
 };
 
-export default SingleAsset;
+export default SingleItem;
