@@ -1,7 +1,6 @@
 import { Grid, makeStyles } from '@material-ui/core';
 import React from 'react';
-import Asset from './Asset';
-import Strategy from './Strategy';
+import AllocationCard, { AllocationCardProps } from './AllocationCard';
 
 export const useStyleAllocation = makeStyles(() => ({
   rootContainer: {
@@ -20,15 +19,41 @@ export const useStyleAllocation = makeStyles(() => ({
   },
 }));
 
+const assets = [
+  { name: 'BADGER', value: 50 },
+  { name: 'DIGG', value: 25 },
+  { name: 'WBTC', value: 10 },
+  { name: 'CVX', value: 15 },
+];
+
+const strategies = [
+  { name: 'BADGER-WBTC', value: 40 },
+  { name: 'DIGG-WBTC', value: 25 },
+  { name: 'crvrenWBTC', value: 20 },
+  { name: 'SLP-WBTC-ETH', value: 15 },
+];
+
 const Allocation = () => {
   const classes = useStyleAllocation();
+  const assetsPayload: AllocationCardProps = {
+    title: 'Asset Allocation',
+    subtitle: 'Subtext',
+    data: assets,
+    path: 'assets',
+  };
+  const strategiesPayload: AllocationCardProps = {
+    title: 'Strategy Allocation',
+    subtitle: 'Subtext',
+    data: strategies,
+    path: 'settvaults',
+  };
   return (
     <Grid container spacing={2} wrap="nowrap" className={classes.rootContainer}>
       <Grid item xs={6}>
-        <Asset />
+        <AllocationCard {...assetsPayload} />
       </Grid>
       <Grid item xs={6}>
-        <Strategy />
+        <AllocationCard {...strategiesPayload} />
       </Grid>
     </Grid>
   );
