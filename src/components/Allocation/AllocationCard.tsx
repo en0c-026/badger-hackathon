@@ -20,17 +20,17 @@ const AllocationCard = ({ title, subtitle, path, data }: AllocationCardProps) =>
         {subtitle}
       </Typography>
       <Grid container alignItems="center">
-        <Grid item xs>
+        <Grid item xs={12} md={6}>
           <PieChart width={240} height={240}>
             <Tooltip formatter={(value: number) => `${value}%`} />
-            <Pie data={data} dataKey="value" nameKey="name" cx="50%" cy="50%">
+            <Pie data={data} dataKey="value" nameKey="name" cx="40%" cy="50%">
               {data.map((single, i) => (
                 <Cell key={i} fill={colors[i]} />
               ))}
             </Pie>
           </PieChart>
         </Grid>
-        <Grid item xs>
+        <Grid item xs={12} md={6}>
           {data.map((asset, i) => (
             <SingleItem key={i} path={path} {...asset} />
           ))}

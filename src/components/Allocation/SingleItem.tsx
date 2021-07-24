@@ -8,7 +8,7 @@ export interface SingleItemProps {
 }
 const SingleItem = ({ name, value, path }: SingleItemProps) => {
   return (
-    <Box display="flex" pt={1} mb={2}>
+    <Box display="flex" pt={1} pl={2} mb={2}>
       <Avatar src={`/img/${path}/${name}.png`} style={{ marginRight: '12px' }} />
       <div>
         <Typography variant="h4">{name}</Typography>

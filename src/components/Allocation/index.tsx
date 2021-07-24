@@ -9,7 +9,7 @@ export const useStyleAllocation = makeStyles(() => ({
     marginBottom: '24px',
   },
   baseCard: {
-    padding: '32px 24px',
+    padding: '32px 8px 32px 24px',
     color: '#FFFFFF',
     width: '100%',
     height: '100%',
@@ -48,11 +48,11 @@ const Allocation = () => {
     path: 'settvaults',
   };
   return (
-    <Grid container spacing={2} wrap="nowrap" className={classes.rootContainer}>
-      <Grid item xs={6}>
+    <Grid container spacing={2} className={classes.rootContainer}>
+      <Grid item xs={12} sm={6}>
         <AllocationCard {...assetsPayload} />
       </Grid>
-      <Grid item xs={6}>
+      <Grid item xs={12} sm={6}>
         <AllocationCard {...strategiesPayload} />
       </Grid>
     </Grid>
