@@ -33,7 +33,7 @@ const strategies = [
   { name: 'SLP-WBTC-ETH', value: 15 },
 ];
 
-const Allocation = () => {
+const Allocation: React.FC = () => {
   const classes = useStyleAllocation();
   const assetsPayload: AllocationCardProps = {
     title: 'Asset Allocation',

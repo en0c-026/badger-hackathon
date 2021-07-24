@@ -6,7 +6,7 @@ export interface SingleItemProps {
   value: number;
   path: string;
 }
-const SingleItem = ({ name, value, path }: SingleItemProps) => {
+const SingleItem: React.FC<SingleItemProps> = ({ name, value, path }) => {
   return (
     <Box display="flex" pt={1} pl={2} mb={2}>
       <Avatar src={`/img/${path}/${name}.png`} style={{ marginRight: '12px' }} />

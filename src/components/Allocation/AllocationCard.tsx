@@ -11,7 +11,7 @@ export interface AllocationCardProps {
   path: string;
   data: Array<{ name: string; value: number }>;
 }
-const AllocationCard = ({ title, subtitle, path, data }: AllocationCardProps) => {
+const AllocationCard: React.FC<AllocationCardProps> = ({ title, subtitle, path, data }) => {
   const classes = useStyleAllocation();
   return (
     <Card className={classes.baseCard}>
