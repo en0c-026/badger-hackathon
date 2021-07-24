@@ -23,7 +23,8 @@ export const arraySetValue = (arr: Array<boolean>, index: string, value: boolean
 // A function that takes a number
 // Format the number, with a comma and with two decimal places
 // Returns the number formatted with the $ sign before the number
-export const formatNumber = (number: number): string => {
+export const formatNumber = (number?: number): string => {
+  if (!number) return '$0.00';
   const formattedNumber: string = number
     .toFixed(2)
     .toString()
