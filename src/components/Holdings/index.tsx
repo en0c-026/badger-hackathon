@@ -5,7 +5,7 @@ import EarningsValue from './EarningsValue';
 import { SettSelector } from './SettSelector';
 import SetupChartButtons from './SetupChartButtons';
 import { SettVaultsChart } from './SettVaultsChart';
-import CharReference from './CharReference';
+import ChartReference from './ChartReference';
 
 export const useStyleHoldings = makeStyles(() => ({
   rootCard: {
@@ -60,7 +60,7 @@ const Holdings = (): JSX.Element => {
         <BadgerRewards />
         <SetupChartButtons timeframe={timeframe} setTimeFrame={setTimeFrame} handleOpenModal={handleOpenModal} />
         <SettVaultsChart width={width} />
-        <CharReference activeVaults={testArray} />
+        <ChartReference activeVaults={testArray} />
       </Grid>
 
       {openModal && (
