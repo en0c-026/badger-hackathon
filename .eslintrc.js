@@ -32,6 +32,7 @@ module.exports = {
     'react-hooks/rules-of-hooks': 'error', // Checks rules of Hooks
     'react-hooks/exhaustive-deps': 'warn', // Checks effect dependencies
     'react/display-name': [0, { ignoreTranspilerName: true }],
+    "react/prop-types": "off",
     'no-empty-pattern': 'warn',
     'unused-imports/no-unused-imports-ts': 'error',
     'prettier/prettier': [
