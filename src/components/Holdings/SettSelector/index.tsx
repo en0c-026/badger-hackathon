@@ -8,13 +8,14 @@ import {
   makeStyles,
   Modal,
   Paper,
+  Theme,
   Typography,
 } from '@material-ui/core';
 import { Check, CheckBoxOutlineBlank, Close } from '@material-ui/icons';
 import { allChecked, arraySetAll } from '../../../utils';
 import Checkboxes from './Checkboxes';
 
-export const useStyleSelector = makeStyles(() => ({
+export const useStyleSelector = makeStyles((theme: Theme) => ({
   modalSelector: {
     position: 'absolute',
     padding: '12px 24px',
@@ -29,17 +30,17 @@ export const useStyleSelector = makeStyles(() => ({
     boxShadow: '0px 0px 3px rgba(0, 0, 0, 0.75)',
   },
   modalGrid: {
-    paddingBottom: '16px',
+    paddingBottom: theme.spacing(2),
   },
   checkedIcon: {
     color: '#CCCCCC',
   },
   icon: {
-    width: '24px',
-    height: '24px',
+    width: theme.spacing(3),
+    height: theme.spacing(3),
   },
   checkBoxesGrid: {
-    paddingTop: '16px',
+    paddingTop: theme.spacing(2),
   },
   uniGrid: {
     width: '70%',
@@ -49,22 +50,21 @@ export const useStyleSelector = makeStyles(() => ({
   },
 }));
 
-interface Props {
+type SettSelectorProps = {
   openModal: boolean;
   handleCloseModal: () => void;
   checkboxs: Array<boolean>;
   setCheckboxs: (checkboxs: Array<boolean>) => void;
-}
+};
 
-export const SettSelector = (props: Props) => {
-  const { openModal, handleCloseModal, checkboxs, setCheckboxs } = props;
+export const SettSelector = ({ openModal, handleCloseModal, checkboxs, setCheckboxs }: SettSelectorProps) => {
   const classes = useStyleSelector();
   const [checked, setChecked] = useState(false);
+
   const handleChangeAll = (event: React.ChangeEvent<HTMLInputElement>) => {
     setCheckboxs(arraySetAll(checkboxs, event.target.checked));
     setChecked(allChecked(checkboxs));
   };
-
   const handleChangeSingle = (event: React.ChangeEvent<HTMLInputElement>) => {
     const id = parseInt(event.target.id);
     checkboxs[id] = event.target.checked;

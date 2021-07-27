@@ -4,11 +4,11 @@ import { Button, Grid, Typography, withStyles } from '@material-ui/core';
 import { useStyleHoldings } from '.';
 import { ToggleButton, ToggleButtonGroup } from '@material-ui/lab';
 
-interface IProps {
+type SetupChartButtonsProps = {
   timeframe: string;
   setTimeFrame: (timeframe: string) => void;
   handleOpenModal: () => void;
-}
+};
 const timeframes: Array<string> = ['1D', '1W', '1M', '1Y', 'ALL'];
 
 const ToggleButtonStyled = withStyles({
@@ -27,9 +27,8 @@ const ToggleButtonStyled = withStyles({
   },
 })(ToggleButton);
 
-const SetupChartButtons = (props: IProps) => {
+const SetupChartButtons = ({ timeframe, setTimeFrame, handleOpenModal }: SetupChartButtonsProps) => {
   const classes = useStyleHoldings();
-  const { timeframe, setTimeFrame, handleOpenModal } = props;
   const handleChange = (event: React.MouseEvent<HTMLElement>, value: any) => {
     if (!value) {
       return;

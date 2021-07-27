@@ -1,9 +1,12 @@
 import { Grid, Typography } from '@material-ui/core';
 import React from 'react';
-import DotColorVault from './SettVaultsChart/DotColorVault';
+import { getDate } from '../../utils';
+import { DotColorVault } from './SettVaultsChart/ToolTipCard';
 
-const CharReference = (props: any) => {
-  const { activeVaults } = props;
+type ChartReferenceProps = {
+  activeVaults: Array<{ name: string; color: string }>;
+};
+const ChartReference = ({ activeVaults }: ChartReferenceProps) => {
   return (
     <Grid container justifyContent="space-between" wrap="nowrap">
       <Grid container>
@@ -16,11 +19,11 @@ const CharReference = (props: any) => {
       </Grid>
       <Grid container wrap="nowrap" justifyContent="flex-end">
         <Typography variant="subtitle1" color="textPrimary">
-          Data as of :29 May, 2021 11:39 PM
+          Data as of :{getDate()}
         </Typography>
       </Grid>
     </Grid>
   );
 };
 
-export default CharReference;
+export default ChartReference;

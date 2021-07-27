@@ -1,10 +1,11 @@
 import { makeStyles, Paper } from '@material-ui/core';
-import React, { memo } from 'react';
+import React, { ReactElement } from 'react';
 import { Area, ComposedChart, Tooltip, XAxis, YAxis } from 'recharts';
-import DateTick from './DateTick';
-import PriceTick from './PriceTick';
+import { kFormatt } from '../../../utils';
 import ToolTipCard from './ToolTipCard';
 
+// This is a demo, it contains fixed data.
+// Until it is implemented in the APY.
 const data = [
   {
     name: 'Page A',
@@ -70,7 +71,27 @@ const testArray = [
   { name: 'uv', color: '#0066FF' },
   { name: 'amt', color: '#FF1FFF' },
 ];
-export const SettVaultsChart = memo(({ width }: any) => {
+
+const PriceTick = (props: any): ReactElement<SVGElement> => {
+  const { x, y, payload } = props;
+  return (
+    <text x={x} y={y} textAnchor="start" fill="#FFFFFF">
+      ${kFormatt(payload.value)}
+    </text>
+  );
+};
+
+const DateTick = ({ x, y, payload }: { x?: number; y?: number; payload?: any}): ReactElement<SVGElement> => {
+  return (
+    <text x={x} y={y} textAnchor="middle" fill="#FFFFFF">
+      {payload.value}
+    </text>
+  );
+};
+// This component is a demo, it contains fixed data.
+// Until it is implemented in the APY.
+
+export const SettVaultsChart = ({ width }: { width: number }) => {
   const classes = useStyleVaultsChart();
   return (
     <Paper className={classes.paperChart}>
@@ -114,4 +135,4 @@ export const SettVaultsChart = memo(({ width }: any) => {
       </ComposedChart>
     </Paper>
   );
-});
+};
