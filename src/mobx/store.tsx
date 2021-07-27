@@ -6,7 +6,7 @@ import { SettVault } from '../model/sett-vault.interface';
 import { StrategyInfo } from '../model/strategy-info.interface';
 
 export class RootStore {
-  private baseUrl = 'https://staging-api.badger.finance/v2';
+  private baseUrl = 'https://api.badger.finance/v2';
   public router: RouterStore<RootStore>;
   public account?: Account;
   public userAddress: string;

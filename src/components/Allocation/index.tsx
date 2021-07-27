@@ -37,7 +37,7 @@ const Allocation = () => {
   const classes = useStyleAllocation();
   const { StrategyInfo } = useStore();
 
-  // assetsPaload, it contains fixed data.
+  // assetsPayload, it contains fixed data.
   // Until it is implemented in the APY.
   const assetsPayload: AllocationCardProps = {
     title: 'Asset Allocation',
