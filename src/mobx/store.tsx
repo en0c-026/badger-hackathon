@@ -9,6 +9,7 @@ export class RootStore {
   private baseUrl = 'https://staging-api.badger.finance/v2';
   public router: RouterStore<RootStore>;
   public account?: Account;
+  public userAddress: string;
   public setts?: SettVault[];
   public prices?: Record<string, number>;
   public loading: boolean;
@@ -18,31 +19,36 @@ export class RootStore {
     this.router = new RouterStore<RootStore>(this);
     this.loading = true;
     this.networkError = false;
+    this.userAddress = '0x4e65175f05b4140a0747c29cce997cd4bb7190d4';
     makeAutoObservable(this);
 
-    this.fetchData('0x4e65175f05b4140a0747c29cce997cd4bb7190d4');
+    this.fetchData();
   }
 
-  fetchData = async (address: string): Promise<void> => {
+  fetchData = async (): Promise<void> => {
     try {
-      console.log('Fetching account data for: ' + address);
-      const resAccount = await fetch(`${this.baseUrl}/accounts/${address}`);
-      const resSetts = await fetch(`${this.baseUrl}/setts/`);
-      const resPrices = await fetch(`${this.baseUrl}/prices/`);
+      console.log('Fetching account data for: ' + this.userAddress);
+      if (!this.userAddress) {
+        this.setData();
+      } else {
+        const resAccount = await fetch(`${this.baseUrl}/accounts/${this.userAddress}`);
+        const resSetts = await fetch(`${this.baseUrl}/setts/`);
+        const resPrices = await fetch(`${this.baseUrl}/prices/`);
 
-      if (resAccount.ok && resPrices.ok) {
-        const _account = await resAccount.json();
-        const _setts = await resSetts.json();
-        const _prices = await resPrices.json();
+        if (resAccount.ok && resPrices.ok && resSetts.ok) {
+          const _account = await resAccount.json();
+          const _setts = await resSetts.json();
+          const _prices = await resPrices.json();
 
-        this.setData(_account, _setts, _prices);
+          this.setData(_account, _setts, _prices);
+        }
       }
     } catch (error) {
       this.setError(error);
     }
   };
 
-  setData = (_account: Account, _setts: SettVault[], _prices: Record<string, number>): void => {
+  setData = (_account?: Account, _setts?: SettVault[], _prices?: Record<string, number>): void => {
     this.account = _account;
     this.setts = _setts;
     this.prices = _prices;
@@ -55,6 +61,10 @@ export class RootStore {
     console.error(error);
   };
 
+  setUserAddress = (address: string): void => {
+    this.userAddress = address;
+  };
+
   priceInBtc = (value: number): number => {
     if (!this.prices) return 0;
     return value / this.prices['0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599'];
@@ -64,6 +74,7 @@ export class RootStore {
     const vaultApr = this.setts?.find((sett) => sett.vaultToken === id);
     return vaultApr as SettVault;
   };
+
   myBoost = (id: string): number => {
     const vault = computed(() => this.fetchVault(id)).get();
     const isBoosteable = vault.boostable;
@@ -73,6 +84,7 @@ export class RootStore {
       return vault.apr;
     }
   };
+
   rangeRoi = (id: string): string => {
     const vault = computed(() => this.fetchVault(id)).get();
     if (vault.minApr && vault.maxApr) {
@@ -81,22 +93,23 @@ export class RootStore {
       return vault.apr.toFixed(2);
     }
   };
+
   get earnedValuePercent(): number {
-    if (!this.account) {
+    if (!this.account || !this.account.earnedValue || !this.account.value) {
       return 0;
     }
     return (this.account.earnedValue / this.account.value) * 100;
   }
 
   get earnedBadgerValue(): number {
-    if (!this.account) {
+    if (!this.account || !this.account.earnedValue) {
       return 0;
     }
     return this.account.balances.filter((balance) => balance.asset === 'BADGER')[0].earnedValue;
   }
 
   get claimableTotal(): number {
-    if (!this.account) {
+    if (!this.account || !this.account.claimableBalances.length) {
       return 0;
     }
     return this.account.claimableBalances.reduce((acc, cur) => acc + cur.balance, 0);
@@ -113,14 +126,16 @@ export class RootStore {
     if (!this.account) return 0;
     return this.account.boost;
   }
+
   get totalValueSetts(): number {
-    if (!this.account) {
+    if (!this.account || !this.account.balances.length) {
       return 0;
     }
     return this.account.balances.reduce((acc, cur) => acc + cur.value, 0);
   }
+
   get StrategyInfo(): StrategyInfo[] {
-    if (!this.account || !this.account.balances) {
+    if (!this.account || !this.account.balances.length) {
       return [];
     }
     const total = this.account.balances.reduce((acc, cur) => acc + cur.value, 0);
@@ -141,6 +156,7 @@ export class RootStore {
       })
       .sort((a, b) => b.allocation - a.allocation);
   }
+
   // get AssetInfo(): Array<any> {
   //   if (!this.account || !this.account.balances) {
   //     return [];
