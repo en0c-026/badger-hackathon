@@ -1,4 +1,4 @@
-import React, { useLayoutEffect, useRef, useState } from 'react';
+import React, { useState } from 'react';
 import { makeStyles, Grid, Paper, Typography, Box, Theme } from '@material-ui/core';
 import { SettSelector } from './SettSelector';
 import SetupChartButtons from './SetupChartButtons';
@@ -66,25 +66,17 @@ const Holdings = () => {
   const [timeframe, setTimeFrame] = useState<string>('1D');
   const [openModal, setOpenModal] = useState<boolean>(false);
   const [checkboxs, setCheckboxs] = useState<Array<boolean>>(defaultState);
-  const targetRef = useRef<any>();
-  const [width, setWidth] = useState(0);
-
-  useLayoutEffect(() => {
-    if (targetRef.current) {
-      setWidth(targetRef.current.offsetWidth);
-    }
-  }, []);
 
   const handleOpenModal = () => setOpenModal(true);
   const handleCloseModal = () => setOpenModal(false);
 
   return (
     <Paper className={classes.rootCard}>
-      <Grid container spacing={3} direction="column" ref={targetRef}>
+      <Grid container spacing={3} direction="column">
         <EarningsValue />
         <BadgerRewards />
         <SetupChartButtons timeframe={timeframe} setTimeFrame={setTimeFrame} handleOpenModal={handleOpenModal} />
-        <SettVaultsChart width={width} />
+        <SettVaultsChart />
         <ChartReference activeVaults={testArray} />
       </Grid>
 

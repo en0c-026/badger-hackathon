@@ -1,6 +1,6 @@
 import { makeStyles, Paper } from '@material-ui/core';
 import React, { ReactElement } from 'react';
-import { Area, ComposedChart, Tooltip, XAxis, YAxis } from 'recharts';
+import { Area, ComposedChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
 import { kFormatt } from '../../../utils';
 import ToolTipCard from './ToolTipCard';
 
@@ -56,6 +56,8 @@ export const useStyleVaultsChart = makeStyles({
     margin: '20px 0px',
     backgroundColor: '#101010',
     borderRadius: '8px',
+    width: '100%',
+    minHeight: '480px',
   },
   toolTipCard: {
     backgroundColor: '#000000',
@@ -81,7 +83,7 @@ const PriceTick = (props: any): ReactElement<SVGElement> => {
   );
 };
 
-const DateTick = ({ x, y, payload }: { x?: number; y?: number; payload?: any}): ReactElement<SVGElement> => {
+const DateTick = ({ x, y, payload }: { x?: number; y?: number; payload?: any }): ReactElement<SVGElement> => {
   return (
     <text x={x} y={y} textAnchor="middle" fill="#FFFFFF">
       {payload.value}
@@ -91,48 +93,50 @@ const DateTick = ({ x, y, payload }: { x?: number; y?: number; payload?: any}): 
 // This component is a demo, it contains fixed data.
 // Until it is implemented in the APY.
 
-export const SettVaultsChart = ({ width }: { width: number }) => {
+export const SettVaultsChart = () => {
   const classes = useStyleVaultsChart();
   return (
     <Paper className={classes.paperChart}>
-      <ComposedChart width={width} height={465} data={data} margin={{ top: 0, right: 0, left: 0, bottom: 0 }}>
-        <Tooltip content={<ToolTipCard />} />
-        <XAxis
-          dataKey="name"
-          mirror
-          axisLine={false}
-          tickLine={{ stroke: '#52B330', strokeWidth: 2 }}
-          tickMargin={13}
-          tick={<DateTick />}
-        />
-        <YAxis
-          axisLine={false}
-          tickLine={false}
-          tickCount={7}
-          mirror
-          padding={{ top: 50, bottom: 25 }}
-          tick={<PriceTick />}
-        />
-        <defs>
-          {testArray.map((key: any, index: any) => (
-            <linearGradient key={index} id={key.name} x1="0" y1="0" x2="0" y2="1">
-              <stop offset="55%" stopColor={key.color} stopOpacity={0.3} />
-              <stop offset="95%" stopColor="#FFFFFF" stopOpacity={0.0001} />
-            </linearGradient>
-          ))}
-        </defs>
-        {testArray.map((key: any, index: any) => (
-          <Area
-            key={index}
-            type="linear"
-            dataKey={key.name}
-            stroke={key.color}
-            strokeWidth={4}
-            fillOpacity={1}
-            fill={`url(#${key.name})`}
+      <ResponsiveContainer width="100%" height="100%">
+        <ComposedChart data={data} margin={{ top: 0, right: 0, left: 0, bottom: 0 }}>
+          <Tooltip content={<ToolTipCard />} />
+          <XAxis
+            dataKey="name"
+            mirror
+            axisLine={false}
+            tickLine={{ stroke: '#52B330', strokeWidth: 2 }}
+            tickMargin={13}
+            tick={<DateTick />}
           />
-        ))}
-      </ComposedChart>
+          <YAxis
+            axisLine={false}
+            tickLine={false}
+            tickCount={7}
+            mirror
+            padding={{ top: 50, bottom: 25 }}
+            tick={<PriceTick />}
+          />
+          <defs>
+            {testArray.map((key: any, index: any) => (
+              <linearGradient key={index} id={key.name} x1="0" y1="0" x2="0" y2="1">
+                <stop offset="55%" stopColor={key.color} stopOpacity={0.3} />
+                <stop offset="95%" stopColor="#FFFFFF" stopOpacity={0.0001} />
+              </linearGradient>
+            ))}
+          </defs>
+          {testArray.map((key: any, index: any) => (
+            <Area
+              key={index}
+              type="linear"
+              dataKey={key.name}
+              stroke={key.color}
+              strokeWidth={4}
+              fillOpacity={1}
+              fill={`url(#${key.name})`}
+            />
+          ))}
+        </ComposedChart>
+      </ResponsiveContainer>
     </Paper>
   );
 };

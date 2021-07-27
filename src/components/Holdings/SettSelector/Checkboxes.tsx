@@ -26,7 +26,7 @@ const ChipCheckbox = withStyles({
   },
 })(Chip);
 
-const LabelCheckBox = ({ pair, checked }: {pair: Partial<VaultPair>; checked: boolean }) => {
+const LabelCheckBox = ({ pair, checked }: { pair: Partial<VaultPair>; checked: boolean }) => {
   const { name, source, tag } = pair;
   return (
     <Box display="flex" alignItems="center">
