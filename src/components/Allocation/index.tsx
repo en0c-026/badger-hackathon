@@ -1,15 +1,17 @@
 import { Grid, makeStyles } from '@material-ui/core';
+import { observer } from 'mobx-react-lite';
 import React from 'react';
+import { useStore } from '../..';
 import AllocationCard, { AllocationCardProps } from './AllocationCard';
 
 export const useStyleAllocation = makeStyles(() => ({
   rootContainer: {
-    minHeight: '504px',
+    maxHeight: '100%',
     minWidth: '100%',
     marginBottom: '24px',
   },
   baseCard: {
-    padding: '32px 8px 32px 24px',
+    padding: '32px 12px 64px 32px',
     color: '#FFFFFF',
     width: '100%',
     height: '100%',
@@ -19,36 +21,23 @@ export const useStyleAllocation = makeStyles(() => ({
   },
 }));
 
-const assets = [
-  { name: 'BADGER', value: 50 },
-  { name: 'DIGG', value: 25 },
-  { name: 'WBTC', value: 10 },
-  { name: 'CVX', value: 15 },
-];
-
-const strategies = [
-  { name: 'BADGER-WBTC', value: 40 },
-  { name: 'DIGG-WBTC', value: 25 },
-  { name: 'crvrenWBTC', value: 20 },
-  { name: 'SLP-WBTC-ETH', value: 15 },
-];
-
-const Allocation: React.FC = () => {
+const Allocation = () => {
   const classes = useStyleAllocation();
+  const { StrategyInfo } = useStore();
   const assetsPayload: AllocationCardProps = {
     title: 'Asset Allocation',
     subtitle: 'Subtext',
-    data: assets,
+    data: StrategyInfo,
     path: 'assets',
   };
   const strategiesPayload: AllocationCardProps = {
     title: 'Strategy Allocation',
     subtitle: 'Subtext',
-    data: strategies,
+    data: StrategyInfo,
     path: 'settvaults',
   };
   return (
-    <Grid container spacing={2} className={classes.rootContainer}>
+    <Grid container spacing={6} className={classes.rootContainer}>
       <Grid item xs={12} sm={6}>
         <AllocationCard {...assetsPayload} />
       </Grid>
@@ -59,4 +48,4 @@ const Allocation: React.FC = () => {
   );
 };
 
-export default Allocation;
+export default observer(Allocation);
