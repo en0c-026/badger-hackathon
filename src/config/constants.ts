@@ -1,16 +1,22 @@
-import { SettVaultPair } from '../model/sett-vault-pair';
+interface VaultPair {
+  id: string;
+  name: string;
+  source: 'UNI' | 'SUSHI' | 'CURVE';
+  symbol: string;
+  tag?: string;
+}
 
-export const uniVaults: Array<SettVaultPair> = [
+export const uniVaults: Array<VaultPair> = [
   { id: '0', name: 'wBTC/Digg', source: 'UNI', symbol: 'DIGG-WBTC' },
   { id: '1', name: 'Badger/wBTC', source: 'UNI', symbol: 'BADGER-WBTC' },
 ];
-export const sushiVaults: Array<SettVaultPair> = [
+export const sushiVaults: Array<VaultPair> = [
   { id: '2', name: 'Wrapped BTC/Digg', source: 'SUSHI', symbol: 'SLP-DIGG-WBTC' },
   { id: '3', name: 'Wrapped BTC/Badger', source: 'SUSHI', symbol: 'SLP-BADGER-WBTC' },
   { id: '4', name: 'Wrapped BTC/Wrapped Ether', source: 'SUSHI', symbol: 'SLP-WBTC-ETH' },
   { id: '5', name: 'Wrapped BTC/ibBTC', source: 'SUSHI', symbol: 'SLP-IBBTC-WBTC' },
 ];
-export const curveVaults: Array<SettVaultPair> = [
+export const curveVaults: Array<VaultPair> = [
   { id: '6', name: 'renBTC/wBTC', source: 'CURVE', symbol: 'crvrenWBTC' },
   { id: '7', name: 'renBTC/wBTC/sBTC', source: 'CURVE', symbol: 'crvsBTC' },
   { id: '8', name: 'tBTC/sBTC', source: 'CURVE', symbol: 'crvtBTC' },
