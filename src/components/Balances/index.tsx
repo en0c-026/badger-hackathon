@@ -4,6 +4,18 @@ import { observer } from 'mobx-react-lite';
 import { useStore } from '../..';
 import TableBalances, { PayloadProps } from './TableBalances';
 
+// This is a demo of what it should return, AssetInfo getter from the store.
+// When this data is available in the API.
+const AssetInfoDemo = [
+  { name: 'WBTC', allocation: 50.22895, balance: 1.71575834, value: 66022.941038, valueInBtc: 1.0 },
+  { name: 'WETH', allocation: 12.02405, balance: 6.84728131, value: 15804.892228, valueInBtc: 0.05998388 },
+  { name: 'USDT', allocation: 10.23445, balance: 13452.57045822, value: 13452.570458, valueInBtc: 0.00002598 },
+  { name: 'BADGER', allocation: 9.03152, balance: 1226.94811476, value: 11871.391188, valueInBtc: 0.00025144 },
+  { name: 'DIGG', allocation: 7.93744, balance: 0.31092346, value: 10481.544504, valueInBtc: 0.87605828 },
+  { name: 'ibBTC', allocation: 7.05744, balance: 0.24312801, value: 9276.581433, valueInBtc: 0.99154899 },
+  { name: 'cvxCRV', allocation: 3.52554, balance: 2966.63379528, value: 4634.835761, valueInBtc: 0.0000406 },
+];
+
 export const useStyleBalances = makeStyles((theme: Theme) => ({
   rootContainer: {
     minWidth: '100%',
@@ -17,7 +29,6 @@ export const useStyleBalances = makeStyles((theme: Theme) => ({
     borderRadius: theme.spacing(2),
     marginBottom: theme.spacing(4),
   },
-  table: {},
   tableHeader: {
     backgroundColor: '#1E1E1E',
     display: 'flex',
@@ -32,7 +43,7 @@ export const useStyleBalances = makeStyles((theme: Theme) => ({
     left: '50%',
     outline: 'none',
     transform: 'translate(-50%, -50%)',
-    minWidth: '580px',
+    minWidth: '760px',
     maxHeight: '580px',
     backgroundColor: '#222222',
     border: '1px solid #111111',
@@ -72,9 +83,11 @@ const Balances = () => {
   const classes = useStyleBalances();
   const { totalValueSetts, StrategyInfo } = useStore();
 
+  // payloadAsset, it contains fixed data.
+  // Until it is implemented in the APY.
   const payloadAsset: PayloadProps = {
     cardHead: {
-      total: totalValueSetts,
+      total: 131465.023321,
       title: 'Asset Balances',
       subtitle: 'Assets that are in your wallet',
       subtitle2: 'Your total asset holdings',
@@ -85,7 +98,7 @@ const Balances = () => {
       col3: 'Price',
       col4: 'Balance',
     },
-    balancesData: StrategyInfo,
+    balancesData: AssetInfoDemo,
   };
   const payloadStrategy: PayloadProps = {
     cardHead: {
