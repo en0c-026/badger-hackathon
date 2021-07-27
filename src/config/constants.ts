@@ -1,10 +1,10 @@
-interface VaultPair {
+export type VaultPair = {
   id: string;
   name: string;
   source: 'UNI' | 'SUSHI' | 'CURVE';
   symbol: string;
   tag?: string;
-}
+};
 
 export const uniVaults: Array<VaultPair> = [
   { id: '0', name: 'wBTC/Digg', source: 'UNI', symbol: 'DIGG-WBTC' },
