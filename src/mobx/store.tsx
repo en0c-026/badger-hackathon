@@ -64,7 +64,23 @@ export class RootStore {
     const vaultApr = this.setts?.find((sett) => sett.vaultToken === id);
     return vaultApr as SettVault;
   };
-
+  myBoost = (id: string): number => {
+    const vault = computed(() => this.fetchVault(id)).get();
+    const isBoosteable = vault.boostable;
+    if (isBoosteable) {
+      return vault.sources.reduce((acc, cur) => (cur.boostable ? acc + (cur.apr + this.multiplier) : acc + cur.apr), 0);
+    } else {
+      return vault.apr;
+    }
+  };
+  rangeRoi = (id: string): string => {
+    const vault = computed(() => this.fetchVault(id)).get();
+    if (vault.minApr && vault.maxApr) {
+      return `${vault.minApr.toFixed(2)}-${vault.maxApr.toFixed(2)}`;
+    } else {
+      return vault.apr.toFixed(2);
+    }
+  };
   get earnedValuePercent(): number {
     if (!this.account) {
       return 0;
@@ -93,13 +109,16 @@ export class RootStore {
     return this.account.claimableBalances.length > 0;
   }
 
+  get multiplier(): number {
+    if (!this.account) return 0;
+    return this.account.boost;
+  }
   get totalValueSetts(): number {
     if (!this.account) {
       return 0;
     }
     return this.account.balances.reduce((acc, cur) => acc + cur.value, 0);
   }
-
   get StrategyInfo(): StrategyInfo[] {
     if (!this.account || !this.account.balances) {
       return [];
@@ -115,6 +134,8 @@ export class RootStore {
           value: item.value,
           valueInBtc: computed(() => this.priceInBtc(item.value / item.balance)).get(),
           vault: computed(() => this.fetchVault(item.id)).get(),
+          myBoost: computed(() => this.myBoost(item.id)).get(),
+          yearlyRoi: computed(() => this.rangeRoi(item.id)).get(),
           settBalance: item,
         };
       })
