@@ -1,5 +1,8 @@
 import {
+  Avatar,
+  Box,
   Card,
+  Chip,
   Divider,
   Grid,
   IconButton,
@@ -20,7 +23,7 @@ import React from 'react';
 import { useStyleBalances } from '..';
 import { StrategyInfo } from '../../../model/strategy-info.interface';
 import { TokenBalance } from '../../../model/token-balance.interface';
-import { formatNumber } from '../../../utils';
+import { formatNumber, getDate } from '../../../utils';
 
 type StrategyModalProps = {
   openModal: boolean;
@@ -28,10 +31,35 @@ type StrategyModalProps = {
   data: StrategyInfo;
 };
 
+const AssetIcon = withStyles({
+  root: {
+    width: '24px',
+    height: '24px',
+    marginRight: '8px',
+  },
+})(Avatar);
+
+const ChipCheckbox = withStyles({
+  root: {
+    fontSize: '10px',
+    fontFamily: 'Jura',
+    fontWeight: 700,
+    lineHeight: '12px',
+    color: '#FFFFFF',
+    marginLeft: '8px',
+    height: '16px',
+    alignSelf: 'center',
+    backgroundColor: '#111111',
+    borderRadius: '4px',
+  },
+  label: {
+    padding: '2px 4px',
+  },
+})(Chip);
+
 export const StyledTableRow = withStyles(() => ({
   root: {
     backgroundColor: '#111111',
-    verticalAlign: 'text-top',
     '&:nth-of-type(odd)': {
       backgroundColor: '#1E1E1E',
     },
@@ -61,11 +89,25 @@ export const StyledTabCell = withStyles(() => ({
     },
   },
   footer: {
-    padding: '8px 16px',
+    padding: '8px 32px',
     color: '#FFFFFF',
+  },
+  paddingNone: {
+    '&:last-child': {
+      padding: '0px 20px',
+    },
   },
 }))(TableCell);
 
+// This component is a demo, it contains fixed data.
+// Until it is implemented in the APY.
+const AvatarBadger = ({ color }: { color: string }) => {
+  return (
+    <AssetIcon style={{ backgroundColor: color }}>
+      <Avatar variant="square" style={{ width: '16px', height: '16px' }} src={`/img/badger.png`} />
+    </AssetIcon>
+  );
+};
 const VaultDetails = ({ data }: { data: StrategyInfo }) => {
   return (
     <Table padding="none">
@@ -79,9 +121,17 @@ const VaultDetails = ({ data }: { data: StrategyInfo }) => {
       </TableHead>
       <TableBody>
         <TableRow>
-          <StyledTabCell>{data.vault.name}</StyledTabCell>
+          <StyledTabCell>
+            <Box display="flex">
+              <AssetIcon variant="square" src={`/img/settvaults/${data.vault.asset}.png`} />
+              <Typography variant="h4" noWrap>
+                {data.vault.name}
+              </Typography>
+              <ChipCheckbox label="TAG" />
+            </Box>
+          </StyledTabCell>
           <StyledTabCell align="center">
-            <Typography variant="h6">
+            <Typography variant="h6" noWrap>
               {data.balance.toFixed(2)} {data.vault.asset}
             </Typography>
             <Typography variant="subtitle1" color="textPrimary">
@@ -90,12 +140,12 @@ const VaultDetails = ({ data }: { data: StrategyInfo }) => {
           </StyledTabCell>
           <StyledTabCell align="center">
             <Typography variant="h6" color="textSecondary">
-              {data.vault.apr.toFixed(2)}%
+              {data.myBoost.toFixed(2)}%
             </Typography>
           </StyledTabCell>
           <StyledTabCell align="center">
-            <Typography variant="h6">
-              {data.vault.minApr?.toFixed(2)}-{data.vault.maxApr?.toFixed(2)}%
+            <Typography variant="h6" noWrap>
+              {data.yearlyRoi}%
             </Typography>
           </StyledTabCell>
         </TableRow>
@@ -111,24 +161,25 @@ const Holdings = ({ earnedTokens, total }: { earnedTokens: TokenBalance[]; total
           <StyledTabCell>Underlying Tokens</StyledTabCell>
           <StyledTabCell align="center">Price</StyledTabCell>
           <StyledTabCell align="center">Amount</StyledTabCell>
-          <StyledTabCell align="center">Balance</StyledTabCell>
+          <StyledTabCell align="right">Balance</StyledTabCell>
         </TableRow>
       </TableHead>
       <TableBody>
         {earnedTokens.map((token) => (
           <StyledTableRow key={`item-${token.name}`}>
             <StyledTabCell>
-              <Typography variant="subtitle1">{token.name}</Typography>
+              <Box display="flex" alignItems="center">
+                <AssetIcon variant="square" src={`/img/assets/${token.symbol}.png`} />
+                <Typography variant="subtitle1">{token.symbol}</Typography>
+              </Box>
             </StyledTabCell>
             <StyledTabCell align="center">
               <Typography variant="body2">{(token.value / token.balance).toFixed(2)}</Typography>
             </StyledTabCell>
             <StyledTabCell align="center">
-              <Typography variant="body2" color="textSecondary">
-                {token.balance.toFixed(4)}
-              </Typography>
+              <Typography variant="body2">{token.balance.toFixed(4)}</Typography>
             </StyledTabCell>
-            <StyledTabCell align="center">
+            <StyledTabCell align="right">
               <Typography variant="body2">{formatNumber(token.value)}</Typography>
             </StyledTabCell>
           </StyledTableRow>
@@ -137,11 +188,13 @@ const Holdings = ({ earnedTokens, total }: { earnedTokens: TokenBalance[]; total
       <TableFooter>
         <TableRow>
           <StyledTabCell>
-            <Typography variant="subtitle1">Total</Typography>
+            <Typography variant="subtitle1" color="textPrimary">
+              Total
+            </Typography>
           </StyledTabCell>
           <StyledTabCell align="center"></StyledTabCell>
           <StyledTabCell align="center"></StyledTabCell>
-          <StyledTabCell align="center">
+          <StyledTabCell align="right">
             <Typography variant="h5">{formatNumber(total)}</Typography>
           </StyledTabCell>
         </TableRow>
@@ -149,13 +202,19 @@ const Holdings = ({ earnedTokens, total }: { earnedTokens: TokenBalance[]; total
     </Table>
   );
 };
+
+// This component is a demo, it contains fixed data.
+// Until it is implemented in the APY.
 const BoostBreakDown = () => {
   return (
     <Table padding="none">
       <TableBody>
         <StyledTableRow>
           <StyledTabCell>
-            <Typography variant="subtitle1">Wack-A-Badger</Typography>
+            <Box display="flex">
+              <AvatarBadger color="#F44336" />
+              <Typography variant="subtitle1">Wack-A-Badger</Typography>
+            </Box>
           </StyledTabCell>
           <StyledTabCell align="right">
             <Typography variant="body2" color="textSecondary">
@@ -165,7 +224,10 @@ const BoostBreakDown = () => {
         </StyledTableRow>
         <StyledTableRow>
           <StyledTabCell>
-            <Typography variant="subtitle1">Badgerpack Joyride</Typography>
+            <Box display="flex">
+              <AvatarBadger color="#A274D1" />
+              <Typography variant="subtitle1">Badgerpack Joyride</Typography>
+            </Box>
           </StyledTabCell>
           <StyledTabCell align="right">
             <Typography variant="body2" color="textSecondary">
@@ -177,12 +239,15 @@ const BoostBreakDown = () => {
     </Table>
   );
 };
+
+// This component is a demo, it contains fixed data.
+// Until it is implemented in the APY.
 const TransactionHistory = () => {
   const lastTransactions = [
-    { action: 'Deposit', amount: '+0.1400', gas: '0.0004', date: '1590934380', asset: 'UNIV2 LP' },
-    { action: 'Withdraw', amount: '-0.0542', gas: '0.0004', date: '1590934380', asset: 'UNIV2 LP' },
-    { action: 'Claim', amount: '+10', gas: '0.001', date: '1590856320', asset: 'BADGER' },
-    { action: 'Deposit', amount: '+0.6', gas: '0.0004', date: '1590819600', asset: 'UNIV2 LP' },
+    { action: 'Deposit', amount: '+0.1400', gas: '0.0004', date: 1592428841001, asset: 'UNIV2 LP' },
+    { action: 'Withdraw', amount: '-0.0542', gas: '0.0004', date: 1592302841441, asset: 'UNIV2 LP' },
+    { action: 'Claim', amount: '+10', gas: '0.001', date: 1590891641441, asset: 'BADGER' },
+    { action: 'Deposit', amount: '+0.6', gas: '0.0004', date: 1590862841451, asset: 'UNIV2 LP' },
   ];
   return (
     <Table padding="none">
@@ -207,11 +272,11 @@ const TransactionHistory = () => {
             </StyledTabCell>
             <StyledTabCell align="center">
               <Typography variant="body2" color="textSecondary">
-                {tx.gas}
+                {tx.gas} ETH
               </Typography>
             </StyledTabCell>
             <StyledTabCell align="center">
-              <Typography variant="body2">{tx.date}</Typography>
+              <Typography variant="body2">{getDate(tx.date)}</Typography>
             </StyledTabCell>
           </StyledTableRow>
         ))}
@@ -219,6 +284,7 @@ const TransactionHistory = () => {
     </Table>
   );
 };
+
 const StrategyModal = ({ openModal, handleCloseModal, data }: StrategyModalProps) => {
   const classes = useStyleBalances();
   return (

@@ -68,7 +68,7 @@ const ConditionalCell = ({ target, data }: ConditionalProps) => {
       <StyledTabCell align="center">
         <Typography>{formatNumber(data.value / data.balance)}</Typography>
         <Typography variant="h6" color="textPrimary">
-          {data.valueInBtc.toFixed(4)}
+          {data.valueInBtc.toFixed(4)} BTC
         </Typography>
       </StyledTabCell>
     );
@@ -139,7 +139,7 @@ const TableBalances = ({ target, payload }: TableBalancesProps) => {
   return (
     <Card className={classes.baseCard}>
       <CardHead {...cardHead} />
-      <Table className={classes.table} padding="none">
+      <Table padding="none">
         <TableHead>
           <HeaderRow {...headerRow} />
         </TableHead>
