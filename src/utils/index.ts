@@ -43,3 +43,16 @@ export const arraySum = (arr: Array<any>): string => {
 export const kFormatt = (num: number) => {
   return num > 999 ? num / 1000 + 'k' : num;
 };
+
+export const getDate = (timestamp?: number): string => {
+  const date = timestamp ? new Date(timestamp) : new Date();
+  const options: Intl.DateTimeFormatOptions = {
+    weekday: 'short',
+    month: 'short',
+    year: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit',
+    hour12: true,
+  };
+  return date.toLocaleString(undefined, options);
+};
