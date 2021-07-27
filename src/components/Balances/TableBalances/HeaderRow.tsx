@@ -1,12 +1,12 @@
 import React from 'react';
-import { StyledTabCell, StyledTableRow } from '.';
+import { StyledTableRow, StyledTabCell } from '.';
 
-export interface HeadRowProps {
+export type HeadRowProps = {
   col1: string;
   col2: string;
   col3: string;
   col4: string;
-}
+};
 
 const HeaderRow = ({ col1, col2, col3, col4 }: HeadRowProps) => {
   return (

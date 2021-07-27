@@ -1,14 +1,15 @@
 import { Box, Typography } from '@material-ui/core';
+import { observer } from 'mobx-react-lite';
 import React from 'react';
-import { useStyleBalances } from '.';
-import { formatNumber } from '../../utils';
+import { useStyleBalances } from '..';
+import { formatNumber } from '../../../utils';
 
-export interface CardHeadProps {
+export type CardHeadProps = {
   total: number;
   title: string;
   subtitle: string;
   subtitle2: string;
-}
+};
 
 const CardHead = ({ total, title, subtitle, subtitle2 }: CardHeadProps) => {
   const classes = useStyleBalances();
@@ -32,4 +33,4 @@ const CardHead = ({ total, title, subtitle, subtitle2 }: CardHeadProps) => {
   );
 };
 
-export default CardHead;
+export default observer(CardHead);
