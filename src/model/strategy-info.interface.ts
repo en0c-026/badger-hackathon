@@ -9,4 +9,6 @@ export interface StrategyInfo {
   valueInBtc: number;
   vault: SettVault;
   settBalance: SettBalance;
+  myBoost: number;
+  yearlyRoi: string;
 }
