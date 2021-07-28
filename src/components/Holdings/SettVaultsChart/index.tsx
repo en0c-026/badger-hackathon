@@ -57,7 +57,7 @@ export const useStyleVaultsChart = makeStyles({
     backgroundColor: '#101010',
     borderRadius: '8px',
     width: '100%',
-    minHeight: '480px',
+    height: '480px',
   },
   toolTipCard: {
     backgroundColor: '#000000',
