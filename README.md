@@ -5,6 +5,7 @@ With the retirement of [Sett Vision](https://sett.vision/), a void in user speci
 The Badger core team has developed an API that is available to consume to provide this information, and is looking for a skilled frontend developer who is proficient in React, Typescript and web3 to develop the Badger Portfolio that will be featured on the main Badger dApp. A design will be provided and specs for the API are documented for reference.
 
 ### List of pending features to implement:
+- [ ] Units testing coverage 100% | Write tests for all components and the store, with Cypress.
 - [ ] web3-react | Add the context to obtain the user's address and be able to make calls with a web provider3.
 - [ ] Claim pending rewards | Add the functionality of claiming rewards via button, calling to the Badger Tree contract.
 - [ ] Full Chart Functionality | Add the ability to change the timeframe in the charts, show or hide charts according to the selected checkboxes.
