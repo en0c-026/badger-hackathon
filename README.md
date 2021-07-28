@@ -6,7 +6,7 @@ The Badger core team has developed an API that is available to consume to provid
 
 ### List of pending features to implement:
 - [ ] Units testing coverage 100% | Write tests for all components and the store, with Cypress.
-- [ ] web3-react | Add the context to obtain the user's address and be able to make calls with a web provider3.
+- [ ] web3-react | Add the context to obtain the user's address and be able to make calls with a Web3 Provider.
 - [ ] Claim pending rewards | Add the functionality of claiming rewards via button, calling to the Badger Tree contract.
 - [ ] Full Chart Functionality | Add the ability to change the timeframe in the charts, show or hide charts according to the selected checkboxes.
 - [ ] Asset sections | Sections containing asset data receive fixed data. Update this to work dynamically as information is available from the API.
