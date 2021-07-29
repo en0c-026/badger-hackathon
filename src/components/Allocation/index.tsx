@@ -54,7 +54,7 @@ const Allocation = ({ strategyInfo }: AllocationProps) => {
     path: 'settvaults',
   };
   return (
-    <Grid container spacing={6} className={classes.rootContainer}>
+    <Grid data-testid="allocation-section" container spacing={6} className={classes.rootContainer}>
       <Grid item xs={12} sm={6}>
         <AllocationCard {...assetsPayload} />
       </Grid>

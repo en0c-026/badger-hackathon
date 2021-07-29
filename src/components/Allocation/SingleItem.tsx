@@ -11,8 +11,13 @@ export type SingleItemProps = {
 const SingleItem = ({ name, allocation, path }: SingleItemProps) => {
   return (
     <Box display="flex" pt={1} pl={2} mb={2}>
-      <Avatar variant="square" src={`/img/${path}/${name}.png`} style={{ marginRight: '12px' }} />
-      <div>
+      <Avatar
+        data-testid={`asset-logo-${name}`}
+        variant="square"
+        src={`/img/${path}/${name}.png`}
+        style={{ marginRight: '12px' }}
+      />
+      <div data-testid={`asset-info-${name}`}>
         <Typography variant="h4">{name}</Typography>
         <Typography variant="subtitle1" color="textPrimary">
           {allocation.toFixed(1)}%

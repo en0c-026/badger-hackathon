@@ -42,7 +42,7 @@ const AllocationCard = ({ title, subtitle, path, data }: AllocationCardProps) =>
         <Grid item xs={12} md={6}>
           <PastelChart data={data} />
         </Grid>
-        <GridStyled item xs={12} md={6}>
+        <GridStyled data-testid="items-list" item xs={12} md={6}>
           {data.map((asset) => (
             <SingleItem key={`item-${asset.name}`} path={path} name={asset.name} allocation={asset.allocation} />
           ))}

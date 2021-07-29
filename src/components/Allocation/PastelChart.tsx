@@ -10,7 +10,7 @@ type PastelChartProps = {
 
 const PastelChart = ({ data }: PastelChartProps) => {
   return (
-    <Box display="flex" justifyContent="center">
+    <Box data-testid="pastel-chart" display="flex" justifyContent="center">
       <PieChart width={248} height={248}>
         <Tooltip formatter={(value: number) => `${value.toFixed(1)}%`} />
         <Pie data={data} dataKey="allocation" nameKey="name" cx="45%" cy="50%">
