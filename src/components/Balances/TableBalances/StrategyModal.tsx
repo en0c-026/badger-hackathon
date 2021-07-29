@@ -132,7 +132,7 @@ const VaultDetails = observer(({ data }: { data: StrategyInfo }) => {
           </StyledTabCell>
           <StyledTabCell align="center">
             <Typography variant="h6" noWrap>
-              {data.balance.toFixed(2)} {data.vault.asset}
+              {data.balance.toFixed(2)} <span>{data.vault.asset}</span>
             </Typography>
             <Typography variant="subtitle1" color="textPrimary">
               {formatNumber(data.value)}
@@ -164,7 +164,7 @@ const Holdings = observer(({ earnedTokens, total }: { earnedTokens: TokenBalance
           <StyledTabCell align="right">Balance</StyledTabCell>
         </TableRow>
       </TableHead>
-      <TableBody>
+      <TableBody data-testid="table-earned-tokens">
         {earnedTokens.map((token) => (
           <StyledTableRow key={`item-${token.name}`}>
             <StyledTabCell>
@@ -288,11 +288,11 @@ const TransactionHistory = observer(() => {
 const StrategyModal = ({ openModal, handleCloseModal, data }: StrategyModalProps) => {
   const classes = useStyleBalances();
   return (
-    <Modal open={openModal} onClose={handleCloseModal}>
+    <Modal data-testid="modal-identifier" open={openModal} onClose={handleCloseModal}>
       <Paper className={classes.modalStrategy}>
         <Grid container justifyContent="space-between" alignItems="center" className={classes.modalGrid}>
           <Typography variant="h3">My Strategy Balances</Typography>
-          <IconButton onClick={handleCloseModal}>
+          <IconButton data-testid="close-modal" onClick={handleCloseModal}>
             <Close color="primary" />
           </IconButton>
         </Grid>

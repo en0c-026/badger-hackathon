@@ -1,5 +1,15 @@
 import React from 'react';
-import { Card, Table, TableBody, TableCell, TableHead, TableRow, Typography, withStyles } from '@material-ui/core';
+import {
+  Card,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Typography,
+  withStyles,
+} from '@material-ui/core';
 import CardHead, { CardHeadProps } from './CardHead';
 import HeaderRow, { HeadRowProps } from './HeaderRow';
 import { observer } from 'mobx-react-lite';
@@ -53,7 +63,7 @@ export type PayloadProps = {
   headerRow: HeadRowProps;
   balancesData: any[];
 };
-type TableBalancesProps = {
+export type TableBalancesProps = {
   target: 'asset' | 'strategy';
   payload: PayloadProps;
 };
@@ -89,7 +99,7 @@ const ConditionalTable = observer(({ target, data }: ConditionalProps) => {
   if (target === 'asset') {
     return (
       <>
-        <StyledTableRow>
+        <StyledTableRow data-testid="asset-table-row">
           <StyledTabCell>
             <Typography variant="h5">{data.name}</Typography>
             <Typography variant="h6" color="textPrimary">
@@ -111,7 +121,7 @@ const ConditionalTable = observer(({ target, data }: ConditionalProps) => {
     return (
       <>
         <StrategyModal openModal={openModal} handleCloseModal={handleCloseModal} data={data} />
-        <StyledTableRow onClick={handleOpenModal}>
+        <StyledTableRow data-testid="strategy-table-row" onClick={handleOpenModal}>
           <StyledTabCell>
             <Typography variant="h5">{data.name}</Typography>
             <Typography variant="h6" color="textPrimary">
@@ -139,16 +149,18 @@ const TableBalances = ({ target, payload }: TableBalancesProps) => {
   return (
     <Card className={classes.baseCard}>
       <CardHead {...cardHead} />
-      <Table padding="none">
-        <TableHead>
-          <HeaderRow {...headerRow} />
-        </TableHead>
-        <TableBody>
-          {balancesData.map((data) => (
-            <ConditionalTable key={`item-${data.name}`} target={target} data={data} />
-          ))}
-        </TableBody>
-      </Table>
+      <TableContainer>
+        <Table padding="none">
+          <TableHead>
+            <HeaderRow {...headerRow} />
+          </TableHead>
+          <TableBody data-testid="table-body-identifier">
+            {balancesData.map((data) => (
+              <ConditionalTable key={`item-${data.name}`} target={target} data={data} />
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
     </Card>
   );
 };

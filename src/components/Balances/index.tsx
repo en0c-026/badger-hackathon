@@ -79,7 +79,7 @@ export const useStyleBalances = makeStyles((theme: Theme) => ({
   },
 }));
 
-type BalancesProps = {
+export type BalancesProps = {
   totalValueSetts: number;
   strategyInfo: StrategyInfo[];
 };
@@ -120,7 +120,7 @@ const Balances = ({ totalValueSetts, strategyInfo }: BalancesProps) => {
     balancesData: strategyInfo,
   };
   return (
-    <div className={classes.rootContainer}>
+    <div data-testid="balances-section" className={classes.rootContainer}>
       <TableBalances target="asset" payload={payloadAsset} />
       <TableBalances target="strategy" payload={payloadStrategy} />
     </div>
