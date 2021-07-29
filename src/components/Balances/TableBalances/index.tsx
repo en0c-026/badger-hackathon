@@ -62,7 +62,7 @@ type ConditionalProps = {
   data: any;
 };
 
-const ConditionalCell = ({ target, data }: ConditionalProps) => {
+const ConditionalCell = observer(({ target, data }: ConditionalProps) => {
   if (target === 'asset') {
     return (
       <StyledTabCell align="center">
@@ -79,9 +79,9 @@ const ConditionalCell = ({ target, data }: ConditionalProps) => {
       </StyledTabCell>
     );
   }
-};
+});
 
-const ConditionalTable = ({ target, data }: ConditionalProps) => {
+const ConditionalTable = observer(({ target, data }: ConditionalProps) => {
   const [openModal, setOpenModal] = React.useState(false);
   const handleOpenModal = () => setOpenModal(true);
   const handleCloseModal = () => setOpenModal(false);
@@ -130,7 +130,7 @@ const ConditionalTable = ({ target, data }: ConditionalProps) => {
       </>
     );
   }
-};
+});
 
 const TableBalances = ({ target, payload }: TableBalancesProps) => {
   const classes = useStyleBalances();

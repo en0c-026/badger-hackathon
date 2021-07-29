@@ -1,22 +1,35 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { Button, Card, Typography } from '@material-ui/core';
 import { useStyleHeader } from '.';
 import { formatNumber } from '../../utils';
 import { observer } from 'mobx-react-lite';
-import { StoreContext } from '../../config/context';
 
-const CardCenter = () => {
+type CardCenterProps = {
+  claimableBalances?: any[];
+  claimableTotal: number;
+  claimable: boolean;
+};
+
+const CardCenter = ({ claimableBalances, claimableTotal, claimable }: CardCenterProps) => {
   const classes = useStyleHeader();
-  const { account, claimableTotal, claimable } = useContext(StoreContext);
   return (
-    <Card className={classes.baseCard}>
-      <Typography variant="caption">{formatNumber(claimableTotal)}</Typography>
+    <Card data-testid="card-center" className={classes.baseCard}>
+      <Typography data-testid="claimable-total" variant="caption">
+        {formatNumber(claimableTotal)}
+      </Typography>
       <Typography variant="subtitle1" color="textPrimary">
         Pending
       </Typography>
-      <Button variant="contained" size="small" className={classes.button} disabled={!claimable} fullWidth>
+      <Button
+        data-testid="claim-button"
+        variant="contained"
+        size="small"
+        className={classes.button}
+        disabled={!claimable}
+        fullWidth
+      >
         <Typography variant="overline" color="primary">
-          CLAIM ALL PENDING ({account?.claimableBalances.length})
+          CLAIM ALL PENDING (<span>{claimableBalances?.length}</span>)
         </Typography>
       </Button>
     </Card>

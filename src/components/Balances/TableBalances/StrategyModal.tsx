@@ -100,7 +100,7 @@ export const StyledTabCell = withStyles(() => ({
 }))(TableCell);
 
 // This component is a demo, it contains fixed data.
-// Until it is implemented in the APY.
+// Until it is implemented in the API.
 const AvatarBadger = ({ color }: { color: string }) => {
   return (
     <AssetIcon style={{ backgroundColor: color }}>
@@ -108,7 +108,7 @@ const AvatarBadger = ({ color }: { color: string }) => {
     </AssetIcon>
   );
 };
-const VaultDetails = ({ data }: { data: StrategyInfo }) => {
+const VaultDetails = observer(({ data }: { data: StrategyInfo }) => {
   return (
     <Table padding="none">
       <TableHead>
@@ -152,8 +152,8 @@ const VaultDetails = ({ data }: { data: StrategyInfo }) => {
       </TableBody>
     </Table>
   );
-};
-const Holdings = ({ earnedTokens, total }: { earnedTokens: TokenBalance[]; total: number }) => {
+});
+const Holdings = observer(({ earnedTokens, total }: { earnedTokens: TokenBalance[]; total: number }) => {
   return (
     <Table padding="none">
       <TableHead>
@@ -201,11 +201,11 @@ const Holdings = ({ earnedTokens, total }: { earnedTokens: TokenBalance[]; total
       </TableFooter>
     </Table>
   );
-};
+});
 
 // This component is a demo, it contains fixed data.
-// Until it is implemented in the APY.
-const BoostBreakDown = () => {
+// Until it is implemented in the API.
+const BoostBreakDown = observer(() => {
   return (
     <Table padding="none">
       <TableBody>
@@ -238,11 +238,11 @@ const BoostBreakDown = () => {
       </TableBody>
     </Table>
   );
-};
+});
 
 // This component is a demo, it contains fixed data.
-// Until it is implemented in the APY.
-const TransactionHistory = () => {
+// Until it is implemented in the API.
+const TransactionHistory = observer(() => {
   const lastTransactions = [
     { action: 'Deposit', amount: '+0.1400', gas: '0.0004', date: 1592428841001, asset: 'UNIV2 LP' },
     { action: 'Withdraw', amount: '-0.0542', gas: '0.0004', date: 1592302841441, asset: 'UNIV2 LP' },
@@ -283,7 +283,7 @@ const TransactionHistory = () => {
       </TableBody>
     </Table>
   );
-};
+});
 
 const StrategyModal = ({ openModal, handleCloseModal, data }: StrategyModalProps) => {
   const classes = useStyleBalances();

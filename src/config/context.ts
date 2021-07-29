@@ -3,3 +3,5 @@ import { RootStore } from '../mobx/store';
 
 export const StoreContext = createContext({} as RootStore);
 export const StoreProvider = StoreContext.Provider;
+
+export const store = new RootStore({ testMod: false });

@@ -1,19 +1,18 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { Card, Typography } from '@material-ui/core';
 import { observer } from 'mobx-react-lite';
 import { useStyleHeader } from '.';
-import { StoreContext } from '../../config/context';
-
-const CardRight = () => {
+const CardRight = ({ boost, boostRank }: { boost?: number; boostRank?: number }) => {
   const classes = useStyleHeader();
-  const { account } = useContext(StoreContext);
   return (
-    <Card className={classes.baseCard}>
-      <Typography variant="caption">{account?.boost.toFixed(2)}</Typography>
+    <Card data-testid="card-right" className={classes.baseCard}>
+      <Typography variant="caption">{boost?.toFixed(2)}</Typography>
       <Typography variant="subtitle1" color="textPrimary">
         My Boost
       </Typography>
-      <Typography variant="h4">Rank No. {account?.boostRank}</Typography>
+      <Typography variant="h4">
+        Rank No. <span>{boostRank}</span>
+      </Typography>
     </Card>
   );
 };

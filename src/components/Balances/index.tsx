@@ -1,12 +1,12 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { makeStyles, Theme } from '@material-ui/core';
 import { observer } from 'mobx-react-lite';
 import TableBalances, { PayloadProps } from './TableBalances';
-import { StoreContext } from '../../config/context';
+import { StrategyInfo } from '../../model/strategy-info.interface';
 
 // This is a demo of what it should return, AssetInfo getter from the store.
 // When this data is available in the API.
-const AssetInfoDemo = [
+const assetInfoDemo = [
   { name: 'WBTC', allocation: 50.22895, balance: 1.71575834, value: 66022.941038, valueInBtc: 1.0 },
   { name: 'WETH', allocation: 12.02405, balance: 6.84728131, value: 15804.892228, valueInBtc: 0.05998388 },
   { name: 'USDT', allocation: 10.23445, balance: 13452.57045822, value: 13452.570458, valueInBtc: 0.00002598 },
@@ -79,12 +79,16 @@ export const useStyleBalances = makeStyles((theme: Theme) => ({
   },
 }));
 
-const Balances = () => {
+type BalancesProps = {
+  totalValueSetts: number;
+  strategyInfo: StrategyInfo[];
+};
+
+const Balances = ({ totalValueSetts, strategyInfo }: BalancesProps) => {
   const classes = useStyleBalances();
-  const { totalValueSetts, StrategyInfo } = useContext(StoreContext);
 
   // payloadAsset, it contains fixed data.
-  // Until it is implemented in the APY.
+  // Until it is implemented in the API.
   const payloadAsset: PayloadProps = {
     cardHead: {
       total: 131465.023321,
@@ -98,7 +102,7 @@ const Balances = () => {
       col3: 'Price',
       col4: 'Balance',
     },
-    balancesData: AssetInfoDemo,
+    balancesData: assetInfoDemo,
   };
   const payloadStrategy: PayloadProps = {
     cardHead: {
@@ -113,7 +117,7 @@ const Balances = () => {
       col3: 'Yearly ROI',
       col4: 'Deposit Balance',
     },
-    balancesData: StrategyInfo,
+    balancesData: strategyInfo,
   };
   return (
     <div className={classes.rootContainer}>

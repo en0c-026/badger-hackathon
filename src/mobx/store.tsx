@@ -14,23 +14,28 @@ export class RootStore {
   public prices?: Record<string, number>;
   public loading: boolean;
   public networkError: boolean;
+  public testMod: boolean;
 
-  constructor() {
+  constructor({ testMod }: { testMod: boolean }) {
     this.router = new RouterStore<RootStore>(this);
-    this.loading = true;
+    this.testMod = testMod;
+    this.loading = false;
     this.networkError = false;
     this.userAddress = '0x4e65175f05b4140a0747c29cce997cd4bb7190d4';
     makeAutoObservable(this);
 
-    this.fetchData();
+    if (!testMod) {
+      this.loading = true;
+      this.fetchData();
+    }
   }
 
   fetchData = async (): Promise<void> => {
     try {
-      console.log('Fetching account data for: ' + this.userAddress);
-      if (!this.userAddress) {
+      if (!this.userAddress || this.testMod) {
         this.setData();
       } else {
+        console.log('Fetching account data for: ' + this.userAddress);
         const resAccount = await fetch(`${this.baseUrl}/accounts/${this.userAddress}`);
         const resSetts = await fetch(`${this.baseUrl}/setts/`);
         const resPrices = await fetch(`${this.baseUrl}/prices/`);
@@ -134,7 +139,7 @@ export class RootStore {
     return this.account.balances.reduce((acc, cur) => acc + cur.value, 0);
   }
 
-  get StrategyInfo(): StrategyInfo[] {
+  get strategyInfo(): StrategyInfo[] {
     if (!this.account || !this.account.balances.length) {
       return [];
     }
@@ -173,6 +178,3 @@ export class RootStore {
   //     .sort((a, b) => b.allocation - a.allocation);
   // }
 }
-const store = new RootStore();
-
-export default store;

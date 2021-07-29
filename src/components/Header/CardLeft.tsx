@@ -1,9 +1,8 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { Card, Typography, Grid, Divider } from '@material-ui/core';
 import { observer } from 'mobx-react-lite';
 import { Area, AreaChart, ResponsiveContainer } from 'recharts';
 import { useStyleHeader } from '.';
-import { StoreContext } from '../../config/context';
 import { formatNumber } from '../../utils';
 
 const data = [
@@ -16,14 +15,22 @@ const data = [
   { name: '7', uv: '600' },
 ];
 
-const CardLeft = () => {
+type CardLeftProps = {
+  value?: number;
+  earnedValue?: number;
+  earnedValuePercent: number;
+  earnedBadgerValue: number;
+};
+
+const CardLeft = ({ value, earnedValue, earnedValuePercent, earnedBadgerValue }: CardLeftProps) => {
   const classes = useStyleHeader();
-  const { account, earnedValuePercent, earnedBadgerValue } = useContext(StoreContext);
   return (
-    <Card className={classes.baseCard}>
+    <Card data-testid="card-left" className={classes.baseCard}>
       <Grid container spacing={1}>
         <Grid item xs={12} sm={6}>
-          <Typography variant="h1">{formatNumber(account?.value)}</Typography>
+          <Typography data-testid="net-worth" variant="h1">
+            {formatNumber(value)}
+          </Typography>
           <Typography variant="h3" color="textPrimary">
             Your net worth
           </Typography>
@@ -53,7 +60,7 @@ const CardLeft = () => {
           </Typography>
         </Grid>
         <Grid item xs>
-          <Typography variant="h6">{formatNumber(account?.earnedValue)}</Typography>
+          <Typography variant="h6">{formatNumber(earnedValue)}</Typography>
           <Typography variant="subtitle2" color="textPrimary">
             ROI in $ value
           </Typography>

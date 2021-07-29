@@ -2,11 +2,12 @@ import { Route } from 'mobx-router';
 import React from 'react';
 import Portfolio from '../components/Portfolio';
 import { RootStore } from '../mobx/store';
+import { StoreContext } from './context';
 
 const routes = {
   home: new Route<RootStore>({
     path: '/',
-    component: <Portfolio />,
+    component: <Portfolio context={StoreContext} />,
   }),
 };
 

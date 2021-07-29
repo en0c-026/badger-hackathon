@@ -1,10 +1,10 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { Box, Button, Grid, makeStyles, TextField, Theme } from '@material-ui/core';
 import CardRight from './CardRight';
 import CardCenter from './CardCenter';
 import CardLeft from './CardLeft';
 import { observer } from 'mobx-react-lite';
-import { StoreContext } from '../../config/context';
+import { RootStore } from '../../mobx/store';
 
 export const useStyleHeader = makeStyles((theme: Theme) => ({
   gridContainer: {
@@ -28,12 +28,23 @@ export const useStyleHeader = makeStyles((theme: Theme) => ({
   },
 }));
 
-const Header = () => {
+const Header = ({ store }: { store: RootStore }) => {
   const classes = useStyleHeader();
-  const { userAddress, setUserAddress, fetchData } = useContext(StoreContext);
+  const {
+    userAddress,
+    setUserAddress,
+    fetchData,
+    account,
+    claimableTotal,
+    claimable,
+    earnedValuePercent,
+    earnedBadgerValue,
+  } = store;
+
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setUserAddress(event.target.value);
   };
+
   return (
     <Grid container spacing={2} className={classes.gridContainer}>
       <Grid item xs={12}>
@@ -49,13 +60,22 @@ const Header = () => {
         </Box>
       </Grid>
       <Grid item xs={12} sm={12} md={6}>
-        <CardLeft />
+        <CardLeft
+          value={account?.value}
+          earnedValue={account?.earnedValue}
+          earnedValuePercent={earnedValuePercent}
+          earnedBadgerValue={earnedBadgerValue}
+        />
       </Grid>
       <Grid item xs={12} sm={6} md={3}>
-        <CardCenter />
+        <CardCenter
+          claimableBalances={account?.claimableBalances}
+          claimableTotal={claimableTotal}
+          claimable={claimable}
+        />
       </Grid>
       <Grid item xs={12} sm={6} md={3}>
-        <CardRight />
+        <CardRight boost={account?.boost} boostRank={account?.boostRank} />
       </Grid>
     </Grid>
   );

@@ -1,7 +1,7 @@
 import React from 'react';
 import { MobxRouter } from 'mobx-router';
 import { makeStyles } from '@material-ui/core';
-import store from './mobx/store';
+import { store } from './config/context';
 
 const useStyles = makeStyles((theme) => ({
   appContainer: {

@@ -9,7 +9,7 @@ export interface AllocationCardProps {
   title: string;
   subtitle: string;
   path: string;
-  data: Array<{ name: string; allocation: number }>;
+  data: any[];
 }
 
 const GridStyled = withStyles(() => ({
@@ -44,7 +44,7 @@ const AllocationCard = ({ title, subtitle, path, data }: AllocationCardProps) =>
         </Grid>
         <GridStyled item xs={12} md={6}>
           {data.map((asset) => (
-            <SingleItem key={`item-${asset.name}`} path={path} {...asset} />
+            <SingleItem key={`item-${asset.name}`} path={path} name={asset.name} allocation={asset.allocation} />
           ))}
         </GridStyled>
       </Grid>
