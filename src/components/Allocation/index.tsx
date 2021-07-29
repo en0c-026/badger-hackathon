@@ -1,8 +1,8 @@
+import React, { useContext } from 'react';
 import { Grid, makeStyles } from '@material-ui/core';
 import { observer } from 'mobx-react-lite';
-import React from 'react';
-import { useStore } from '../..';
 import AllocationCard, { AllocationCardProps } from './AllocationCard';
+import { StoreContext } from '../../config/context';
 
 export const useStyleAllocation = makeStyles(() => ({
   rootContainer: {
@@ -35,7 +35,7 @@ const AssetInfoDemo = [
 
 const Allocation = () => {
   const classes = useStyleAllocation();
-  const { StrategyInfo } = useStore();
+  const { StrategyInfo } = useContext(StoreContext);
 
   // assetsPayload, it contains fixed data.
   // Until it is implemented in the APY.

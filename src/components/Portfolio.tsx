@@ -4,8 +4,9 @@ import Header from './Header';
 import Holdings from './Holdings';
 import Allocation from './Allocation';
 import Balances from './Balances';
-import { useStore } from '..';
 import { observer } from 'mobx-react-lite';
+import { useContext } from 'react';
+import { StoreContext } from '../config/context';
 
 const useStyles = makeStyles(() => ({
   rootContainer: {
@@ -30,7 +31,7 @@ const useStyles = makeStyles(() => ({
 
 const Portfolio = () => {
   const classes = useStyles();
-  const { loading, networkError, fetchData } = useStore();
+  const { loading, networkError, fetchData } = useContext(StoreContext);
 
   useEffect(() => {
     const callData = setInterval(() => {

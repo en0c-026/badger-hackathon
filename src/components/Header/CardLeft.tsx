@@ -1,9 +1,9 @@
+import React, { useContext } from 'react';
 import { Card, Typography, Grid, Divider } from '@material-ui/core';
 import { observer } from 'mobx-react-lite';
-import React from 'react';
 import { Area, AreaChart, ResponsiveContainer } from 'recharts';
 import { useStyleHeader } from '.';
-import { useStore } from '../..';
+import { StoreContext } from '../../config/context';
 import { formatNumber } from '../../utils';
 
 const data = [
@@ -18,7 +18,7 @@ const data = [
 
 const CardLeft = () => {
   const classes = useStyleHeader();
-  const { account, earnedValuePercent, earnedBadgerValue } = useStore();
+  const { account, earnedValuePercent, earnedBadgerValue } = useContext(StoreContext);
   return (
     <Card className={classes.baseCard}>
       <Grid container spacing={1}>

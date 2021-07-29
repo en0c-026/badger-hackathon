@@ -1,12 +1,12 @@
+import React, { useContext } from 'react';
 import { Card, Typography } from '@material-ui/core';
 import { observer } from 'mobx-react-lite';
-import React from 'react';
 import { useStyleHeader } from '.';
-import { useStore } from '../..';
+import { StoreContext } from '../../config/context';
 
 const CardRight = () => {
   const classes = useStyleHeader();
-  const { account } = useStore();
+  const { account } = useContext(StoreContext);
   return (
     <Card className={classes.baseCard}>
       <Typography variant="caption">{account?.boost.toFixed(2)}</Typography>

@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { makeStyles, Theme } from '@material-ui/core';
 import { observer } from 'mobx-react-lite';
-import { useStore } from '../..';
 import TableBalances, { PayloadProps } from './TableBalances';
+import { StoreContext } from '../../config/context';
 
 // This is a demo of what it should return, AssetInfo getter from the store.
 // When this data is available in the API.
@@ -81,7 +81,7 @@ export const useStyleBalances = makeStyles((theme: Theme) => ({
 
 const Balances = () => {
   const classes = useStyleBalances();
-  const { totalValueSetts, StrategyInfo } = useStore();
+  const { totalValueSetts, StrategyInfo } = useContext(StoreContext);
 
   // payloadAsset, it contains fixed data.
   // Until it is implemented in the APY.

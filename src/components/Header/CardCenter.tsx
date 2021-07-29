@@ -1,13 +1,13 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Button, Card, Typography } from '@material-ui/core';
 import { useStyleHeader } from '.';
 import { formatNumber } from '../../utils';
 import { observer } from 'mobx-react-lite';
-import { useStore } from '../..';
+import { StoreContext } from '../../config/context';
 
 const CardCenter = () => {
   const classes = useStyleHeader();
-  const { account, claimableTotal, claimable } = useStore();
+  const { account, claimableTotal, claimable } = useContext(StoreContext);
   return (
     <Card className={classes.baseCard}>
       <Typography variant="caption">{formatNumber(claimableTotal)}</Typography>

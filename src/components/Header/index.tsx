@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Box, Button, Grid, makeStyles, TextField, Theme } from '@material-ui/core';
 import CardRight from './CardRight';
 import CardCenter from './CardCenter';
 import CardLeft from './CardLeft';
 import { observer } from 'mobx-react-lite';
-import { useStore } from '../..';
+import { StoreContext } from '../../config/context';
 
 export const useStyleHeader = makeStyles((theme: Theme) => ({
   gridContainer: {
@@ -30,7 +30,7 @@ export const useStyleHeader = makeStyles((theme: Theme) => ({
 
 const Header = () => {
   const classes = useStyleHeader();
-  const { userAddress, setUserAddress, fetchData } = useStore();
+  const { userAddress, setUserAddress, fetchData } = useContext(StoreContext);
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setUserAddress(event.target.value);
   };
