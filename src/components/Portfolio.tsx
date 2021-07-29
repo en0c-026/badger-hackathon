@@ -6,7 +6,7 @@ import Allocation from './Allocation';
 import Balances from './Balances';
 import { observer } from 'mobx-react-lite';
 import { useContext } from 'react';
-import { StoreContext } from '../config/context';
+import { RootStore } from '../mobx/store';
 
 const useStyles = makeStyles(() => ({
   rootContainer: {
@@ -29,30 +29,29 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const Portfolio = () => {
+const Portfolio = ({ context }: { context: React.Context<RootStore> }) => {
   const classes = useStyles();
-  const { loading, networkError, fetchData } = useContext(StoreContext);
+  const store = useContext(context);
+  const { loading, networkError, fetchData, testMod, strategyInfo, totalValueSetts } = store;
 
   useEffect(() => {
-    const callData = setInterval(() => {
-      fetchData();
-    }, 60000);
-
-    return () => {
-      clearInterval(callData);
-    };
+    if (!testMod) {
+      setInterval(() => {
+        fetchData();
+      }, 60000);
+    }
   }, [fetchData]);
 
   if (loading) {
     return (
-      <div className={classes.loader}>
+      <div data-testid="loading" className={classes.loader}>
         <LinearProgress color="secondary" />
       </div>
     );
   }
   if (networkError) {
     return (
-      <div className={classes.loader}>
+      <div data-testid="network-error" className={classes.loader}>
         <Snackbar
           anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
           open={true}
@@ -62,11 +61,11 @@ const Portfolio = () => {
     );
   }
   return (
-    <div className={classes.rootContainer}>
-      <Header />
+    <div data-testid="portfolio" className={classes.rootContainer}>
+      <Header store={store} />
       <Holdings />
-      <Allocation />
-      <Balances />
+      <Allocation strategyInfo={strategyInfo} />
+      <Balances totalValueSetts={totalValueSetts} strategyInfo={strategyInfo} />
     </div>
   );
 };
