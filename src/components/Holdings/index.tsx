@@ -29,7 +29,7 @@ export const useStyleHoldings = makeStyles((theme: Theme) => ({
 }));
 
 // This is a demo, it contains fixed data.
-// Until it is implemented in the APY.
+// Until it is implemented in the API.
 const defaultState: Array<boolean> = [false, false, false, false, false, false, false, false, false, false];
 
 const testArray = [
@@ -60,7 +60,7 @@ const EarningsValue = () => {
   );
 };
 // This component is a demo, it contains fixed data.
-// Until it is implemented in the APY.
+// Until it is implemented in the API.
 const Holdings = () => {
   const classes = useStyleHoldings();
   const [timeframe, setTimeFrame] = useState<string>('1D');

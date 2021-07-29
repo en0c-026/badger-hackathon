@@ -5,7 +5,7 @@ import { kFormatt } from '../../../utils';
 import ToolTipCard from './ToolTipCard';
 
 // This is a demo, it contains fixed data.
-// Until it is implemented in the APY.
+// Until it is implemented in the API.
 const data = [
   {
     name: 'Page A',
@@ -91,7 +91,7 @@ const DateTick = ({ x, y, payload }: { x?: number; y?: number; payload?: any }):
   );
 };
 // This component is a demo, it contains fixed data.
-// Until it is implemented in the APY.
+// Until it is implemented in the API.
 
 export const SettVaultsChart = () => {
   const classes = useStyleVaultsChart();
