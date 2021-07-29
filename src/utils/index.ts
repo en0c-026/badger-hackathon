@@ -41,7 +41,7 @@ export const kFormatt = (num: number): string | number => {
 export const getDate = (timestamp?: number): string => {
   const date = timestamp ? new Date(timestamp) : new Date();
   const options: Intl.DateTimeFormatOptions = {
-    weekday: 'short',
+    day: '2-digit',
     month: 'short',
     year: 'numeric',
     hour: '2-digit',
